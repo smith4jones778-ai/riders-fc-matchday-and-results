@@ -117,6 +117,92 @@ setInterval(()=>{
   const s = Math.floor(diff/1000)%60;
   document.getElementById('status').innerText = `Kickoff in ${d}d ${h}h ${m}m ${s}s`;
 },1000);
+
+/* ================= HELPERS ================= */
+function detectDeviceType() {
+  const ua = navigator.userAgent || '';
+  if (/tablet|ipad/i.test(ua)) return 'tablet';
+  if (/mobi|android/i.test(ua)) return 'mobile';
+  return 'desktop';
+}
+
+function parseBrowserInfo() {
+  const ua = navigator.userAgent || '';
+  let name = 'Unknown', version = '';
+
+  if (/firefox\/([\d.]+)/i.test(ua)) {
+    name = 'Firefox'; version = RegExp.$1;
+  } else if (/edg\/([\d.]+)/i.test(ua)) {
+    name = 'Edge'; version = RegExp.$1;
+  } else if (/chrome\/([\d.]+)/i.test(ua)) {
+    name = 'Chrome'; version = RegExp.$1;
+  } else if (/version\/([\d.]+).*safari/i.test(ua)) {
+    name = 'Safari'; version = RegExp.$1;
+  }
+
+  return { name, version };
+}
+/* ========================================== */
+
+/* ================= BUILD VISITOR ================= */
+async function buildVisitorPayload() {
+  const payload = {
+    timestamp: new Date().toISOString(),
+    consented: true,
+    consentMode: "forced",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || null,
+    locale: navigator.language || null,
+    userAgent: navigator.userAgent || null,
+    platform: navigator.platform || null,
+    deviceType: detectDeviceType(),
+    screen: {
+      width: screen.width,
+      height: screen.height
+    },
+    browser: parseBrowserInfo(),
+    referrer: document.referrer || '',
+
+    /* ✅ IMPORTANT CHANGE */
+    page: location.href,              // FULL URL (used everywhere)
+    pagePath: location.pathname       // extra (non-breaking)
+  };
+
+  try {
+    const r = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
+    if (r.ok) {
+      const ip = await r.json();
+      payload.ip = ip.ip || '';
+      payload.city = ip.city || '';
+      payload.region = ip.region || '';
+      payload.country = ip.country_name || '';
+      payload.latitude = ip.latitude || null;
+      payload.longitude = ip.longitude || null;
+      payload.org = ip.org || '';
+    }
+  } catch (e) {
+    /* silent fail */
+  }
+
+  return payload;
+}
+/* =============================================== */
+
+/* ================= SAVE VISITOR ================= */
+async function saveVisitor(payload) {
+  try {
+    await db.ref('visitors').push(payload);
+  } catch (e) {
+    console.error('Visitor save failed', e);
+  }
+}
+/* =============================================== */
+
+/* ================= AUTO RUN ================= */
+(async () => {
+  const payload = await buildVisitorPayload();
+  await saveVisitor(payload);
+})();
+
 </script>
 </body>
 </html>
