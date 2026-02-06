@@ -105,7 +105,14 @@ function drawClock(sec){
 }
 
 // ================= KICKOFF COUNTDOWN =================
-const kickoff = new Date(2026,6,2,15,00,0).getTime();
+const now = new Date();
+const kickoff = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate(),
+  15, 0, 0
+).getTime();
+
 setInterval(()=>{
   const diff = kickoff - Date.now();
   if(diff <= 0){
