@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SBA Grant Eligibility Simulator 2026</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script><style>
+body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(135deg,#f6f9ff,#eef3ff);color:#1f2a44;}
+header{background:#fff;padding:20px;box-shadow:0 8px 25px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center;}
+header h1{font-size:18px;color:#1e3a8a;margin:0;}
+.badge{background:#e0ecff;color:#1e3a8a;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.container{max-width:1100px;margin:30px auto;display:grid;grid-template-columns:1fr 1fr;gap:25px;padding:0 15px;}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
+input{width:100%;padding:12px;margin:8px 0;border:1px solid #dbe3f3;border-radius:10px;}
+button{width:100%;padding:14px;background:#1e3a8a;color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer;}
+.result-box{background:#f8fbff;border:1px solid #dbe3f3;padding:15px;border-radius:12px;margin-top:10px;}
+.grant{font-size:22px;font-weight:700;color:#16a34a;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+td,th{padding:8px;border-bottom:1px solid #eee;font-size:13px;text-align:left;}
+.footer{text-align:center;padding:15px;font-size:12px;color:#6b7280;}
+@media(max-width:768px){.container{grid-template-columns:1fr;}header{flex-direction:column;gap:10px;}}
+</style></head><body><header>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <img src="sba_logo.png" style="height:40px;">
+    <h1>2026 SBA Grant Eligibility Simulator</h1>
+  </div>
+  <span class="badge">SIMULATION SYSTEM</span>
+</header><!-- WELCOME SECTION --><div style="max-width:1100px;margin:20px auto;padding:0 15px;">
+  <div style="background:#fff;padding:18px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.05);">
+    <h2 style="margin:0;color:#1e3a8a;">Welcome</h2>
+    <p style="font-size:14px;color:#4b5563;margin-top:8px;">
+      This platform helps you check your simulated eligibility for business grants. Grants are important financial support tools that help businesses grow, expand operations, and remain stable.
+    </p>
+  </div>
+</div><div class="container"><div class="card">
+<h2>Eligibility Form</h2>
+<input id="name" placeholder="Full Name" />
+<input id="email" placeholder="Email Address" />
+<input id="phone" placeholder="Phone Number" />
+<input id="address" placeholder="Home Address" />
+<input id="businessName" placeholder="Business Name" />
+<input id="state" placeholder="State" />
+<input id="ein" placeholder="EIN / SSN" />
+<input id="income" placeholder="Annual Income" />
+<button onclick="checkEligibility()">Check Eligibility</button>
+</div><div class="card">
+<h2>Eligibility Result</h2>
+<div id="output" class="result-box">Submit form to view result.</div>
+</div></div><div class="footer">© 2026 Simulation Platform</div><script>
+const firebaseConfig={apiKey:"AIzaSyB-BUuIs7VCzeZgGXziqsAk-zr7UarRp4c",authDomain:"survey-d97e7.firebaseapp.com",projectId:"survey-d97e7"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+function randomGrant(){return Math.floor(Math.random()*240000)+10000;}
+function score(){return Math.floor(Math.random()*100);}
+
+async function checkEligibility(){
+  const email=document.getElementById("email").value;
+  const docRef=db.collection("applications").doc(email);
+  const docSnap=await docRef.get();
+
+  if(docSnap.exists){
+    const d=docSnap.data();
+    document.getElementById("output").innerHTML=`
+    <div class="grant">$${d.grant.toLocaleString()}</div>
+    <p><b>${d.name}</b> (Existing Result)</p>
+    <table>
+    <tr><th>Email</th><td>${d.email}</td></tr>
+    <tr><th>Business</th><td>${d.businessName}</td></tr>
+    <tr><th>State</th><td>${d.state}</td></tr>
+    <tr><th>Score</th><td>${d.eligibility}/100</td></tr>
+    </table>`;
+    return;
+  }
+
+  const data={
+    name:document.getElementById("name").value,
+    email,
+    phone:document.getElementById("phone").value,
+    address:document.getElementById("address").value,
+    businessName:document.getElementById("businessName").value,
+    state:document.getElementById("state").value,
+    ein:document.getElementById("ein").value,
+    income:document.getElementById("income").value,
+    grant:randomGrant(),
+    eligibility:score(),
+    createdAt:new Date()
+  };
+
+  await docRef.set(data);
+
+  document.getElementById("output").innerHTML=`
+  <div class="grant">$${data.grant.toLocaleString()}</div>
+  <p><b>${data.name}</b>, new result</p>
+  <table>
+  <tr><th>Email</th><td>${data.email}</td></tr>
+  <tr><th>Business</th><td>${data.businessName}</td></tr>
+  <tr><th>State</th><td>${data.state}</td></tr>
+  <tr><th>Score</th><td>${data.eligibility}/100</td></tr>
+  </table>`;
+}
+</script></body>
+</html>
