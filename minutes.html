@@ -6,143 +6,433 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root {
+:root{
   --primary:#0b3d91;
-  --bg:#f4f6f9;
+  --secondary:#123d80;
+  --bg:#eef2f7;
   --card:#ffffff;
+  --border:#d9e1ec;
 }
 
-* { box-sizing:border-box; font-family:Arial, sans-serif; }
+*{
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
-body {
+body{
   margin:0;
   background:var(--bg);
+  color:#222;
 }
 
 /* HEADER */
-header {
-  background:var(--primary);
+header{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
   color:white;
-  padding:1rem 1.5rem;
+  padding:1rem 2rem;
+  box-shadow:0 3px 10px rgba(0,0,0,0.12);
 }
 
-.header-inner {
-  max-width:1100px;
-  margin:auto;
+.header-inner{
+  width:100%;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   flex-wrap:wrap;
+  gap:20px;
 }
 
-.logo-wrap {
+.logo-wrap{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:15px;
 }
 
-.logo-ring {
-  width:80px;
-  height:80px;
+.logo-ring{
+  width:85px;
+  height:85px;
   border-radius:50%;
-  border:4px solid white;
+  background:white;
+  border:4px solid rgba(255,255,255,0.5);
   display:flex;
   align-items:center;
   justify-content:center;
-  background:white;
 }
 
-.logo-ring img {
-  width:60px;
-  height:60px;
-  border-radius:50%;
+.logo-ring img{
+  width:65px;
+  height:65px;
   object-fit:cover;
+  border-radius:50%;
 }
 
-nav a {
+.club-title h1{
+  margin:0;
+  font-size:2rem;
+}
+
+.club-title p{
+  margin:4px 0 0;
+  opacity:0.9;
+}
+
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+nav a{
   color:white;
-  margin-left:15px;
   text-decoration:none;
   font-weight:bold;
+  padding:8px 14px;
+  border-radius:6px;
+  transition:0.2s;
 }
 
-nav a:hover {
-  text-decoration:underline;
+nav a:hover{
+  background:rgba(255,255,255,0.12);
 }
 
-/* SECTIONS */
-section {
-  max-width:1100px;
-  margin:auto;
-  padding:1.5rem;
+/* MAIN LAYOUT */
+main{
+  width:100%;
+  padding:20px;
 }
 
-.card {
+/* CARDS */
+.card{
+  width:100%;
   background:var(--card);
-  padding:1.3rem;
-  border-radius:8px;
-  margin-bottom:20px;
+  border-radius:16px;
+  padding:24px;
+  margin-bottom:24px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
 }
 
-.directors {
+.card h2{
+  margin-top:0;
+  color:var(--primary);
+  margin-bottom:15px;
+}
+
+/* DIRECTORS */
+.directors{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:12px;
+  gap:16px;
 }
 
-.director {
-  background:#eef2ff;
-  padding:15px;
-  border-radius:6px;
+.director{
+  background:#f4f7ff;
+  border:1px solid #dfe7ff;
+  border-radius:12px;
+  padding:20px;
   text-align:center;
 }
 
-.director h4 {
-  margin:5px 0;
-  color:#0b3d91;
+.director h4{
+  margin:0;
+  color:var(--primary);
 }
 
-.filters {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+.director p{
+  margin-top:8px;
+  color:#555;
 }
 
-select {
+/* FILTERS */
+.filters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+select{
   width:100%;
-  padding:10px;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:white;
+  font-size:15px;
 }
 
-iframe {
+/* MINUTES VIEWER */
+.viewer-container{
   width:100%;
-  height:480px;
-  border:1px solid #ccc;
+  min-height:800px;
+  background:white;
+  border-radius:14px;
+  border:1px solid #d8dee8;
+  overflow:hidden;
+}
+
+iframe{
+  width:100%;
+  min-height:800px;
+  border:none;
   background:white;
 }
 
 /* PROJECTS */
-.project {
-  padding:10px;
-  border-left:4px solid var(--primary);
-  background:#f0f4ff;
-  margin-bottom:10px;
+.project{
+  background:#f4f7ff;
+  border-left:5px solid var(--primary);
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:12px;
+  font-weight:600;
 }
 
-.toggle-btn {
+.toggle-btn{
   background:var(--primary);
   color:white;
   border:none;
-  padding:10px 14px;
+  padding:13px 18px;
+  border-radius:8px;
   cursor:pointer;
-  border-radius:5px;
-  margin-bottom:10px;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.toggle-btn:hover{
+  opacity:0.92;
 }
 
 /* FOOTER */
-footer {
+footer{
   text-align:center;
-  padding:20px;
-  color:#555;
+  padding:30px;
+  color:#666;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+
+  header{
+    padding:16px;
+  }
+
+  .header-inner{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+  }
+
+  nav{
+    width:100%;
+    justify-content:flex-start;
+    overflow-x:auto;
+    padding-bottom:4px;
+  }
+
+  nav a{
+    white-space:nowrap;
+  }
+
+  main{
+    padding:12px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:14px;
+    width:100%;
+    overflow:hidden;
+  }
+
+  .directors{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .viewer-container{
+    width:100%;
+    border-radius:12px;
+    overflow:hidden;
+  }
+
+  iframe{
+    width:100%;
+    min-height:700px;
+    display:block;
+  }
+
+}
+
+/* MOBILE PHONES */
+@media(max-width:768px){
+
+  body{
+    overflow-x:hidden;
+  }
+
+  header{
+    padding:14px 12px;
+  }
+
+  .logo-wrap{
+    width:100%;
+    align-items:center;
+    gap:12px;
+  }
+
+  .logo-ring{
+    width:62px;
+    height:62px;
+    min-width:62px;
+  }
+
+  .logo-ring img{
+    width:48px;
+    height:48px;
+  }
+
+  .club-title{
+    width:100%;
+  }
+
+  .club-title h1{
+    font-size:1.35rem;
+    line-height:1.2;
+  }
+
+  .club-title p{
+    font-size:13px;
+    margin-top:3px;
+  }
+
+  nav{
+    gap:10px;
+    width:100%;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
+  }
+
+  nav::-webkit-scrollbar{
+    display:none;
+  }
+
+  nav a{
+    font-size:13px;
+    padding:8px 12px;
+    flex-shrink:0;
+  }
+
+  main{
+    width:100%;
+    padding:8px;
+  }
+
+  .card{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:14px;
+  }
+
+  .card h2{
+    font-size:1.15rem;
+    line-height:1.4;
+  }
+
+  .card p{
+    font-size:14px;
+    line-height:1.7;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  select{
+    width:100%;
+    padding:13px;
+    font-size:15px;
+    border-radius:10px;
+  }
+
+  .directors{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .director{
+    width:100%;
+    padding:16px;
+  }
+
+  .director h4{
+    font-size:15px;
+  }
+
+  .director p{
+    font-size:13px;
+  }
+
+  .viewer-container{
+    width:100%;
+    min-height:auto;
+    border-radius:10px;
+    overflow:hidden;
+  }
+
+  iframe{
+    width:100%;
+    min-height:85vh;
+    border:none;
+    display:block;
+    background:white;
+  }
+
+  .project{
+    width:100%;
+    padding:14px;
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  .toggle-btn{
+    width:100%;
+    padding:14px;
+    font-size:15px;
+  }
+
+  footer{
+    padding:20px 12px;
+    font-size:13px;
+    line-height:1.6;
+  }
+
+}
+
+/* EXTRA SMALL DEVICES */
+@media(max-width:480px){
+
+  main{
+    padding:6px;
+  }
+
+  .card{
+    padding:12px;
+    border-radius:10px;
+  }
+
+  .club-title h1{
+    font-size:1.2rem;
+  }
+
+  .club-title p{
+    font-size:12px;
+  }
+
+  iframe{
+    min-height:90vh;
+  }
+
 }
 </style>
 </head>
@@ -150,15 +440,20 @@ footer {
 <body>
 
 <header>
+
   <div class="header-inner">
+
     <div class="logo-wrap">
+
       <div class="logo-ring">
         <img src="riders-logo.jpg" alt="Riders FC Logo">
       </div>
-      <div>
-        <h2 style="margin:0">Riders FC</h2>
-        <small>Board Governance</small>
+
+      <div class="club-title">
+        <h1>Riders FC</h1>
+        <p>Board Governance & Meeting Minutes</p>
       </div>
+
     </div>
 
     <nav>
@@ -166,71 +461,133 @@ footer {
       <a href="#">Players</a>
       <a href="#">Contribution</a>
     </nav>
+
   </div>
+
 </header>
 
-<section>
+<main>
 
   <!-- ABOUT -->
   <div class="card">
+
     <h2>About Riders FC</h2>
-    <p>
-      Riders FC is a professional football club committed to transparency,
-      accountability, and strong governance through structured Board meetings.
+
+    <p style="line-height:1.8;">
+      Riders FC is committed to professional governance,
+      transparency, strategic planning, and accountability through
+      structured Board meetings and documented resolutions.
     </p>
+
   </div>
 
   <!-- DIRECTORS -->
   <div class="card">
+
     <h2>Board of Directors</h2>
+
     <div class="directors">
-      <div class="director"><h4>Mr. Daniel Okoye</h4><p>Chairman</p></div>
-      <div class="director"><h4>Mrs. Amina Bello</h4><p>Vice Chairman</p></div>
-      <div class="director"><h4>Mr. Samuel Ade</h4><p>Secretary</p></div>
-      <div class="director"><h4>Mrs. Grace Mensah</h4><p>Treasurer</p></div>
-      <div class="director"><h4>Mr. Ibrahim Musa</h4><p>Director of Football</p></div>
-      <div class="director"><h4>Mr. Collins Nwoye</h4><p>Director of Operations</p></div>
-      <div class="director"><h4>Ms. Linda Ofori</h4><p>Independent Director</p></div>
+
+      <div class="director">
+        <h4>Mr. Daniel Okoye</h4>
+        <p>Chairman</p>
+      </div>
+
+      <div class="director">
+        <h4>Mrs. Amina Bello</h4>
+        <p>Vice Chairman</p>
+      </div>
+
+      <div class="director">
+        <h4>Mr. Samuel Ade</h4>
+        <p>Secretary</p>
+      </div>
+
+      <div class="director">
+        <h4>Mrs. Grace Mensah</h4>
+        <p>Treasurer</p>
+      </div>
+
+      <div class="director">
+        <h4>Mr. Ibrahim Musa</h4>
+        <p>Director of Football</p>
+      </div>
+
+      <div class="director">
+        <h4>Mr. Collins Nwoye</h4>
+        <p>Director of Operations</p>
+      </div>
+
+      <div class="director">
+        <h4>Ms. Linda Ofori</h4>
+        <p>Independent Director</p>
+      </div>
+
     </div>
+
   </div>
 
   <!-- MINUTES -->
   <div class="card">
+
     <h2>Board Meeting Minutes</h2>
+
     <div class="filters">
+
       <select id="yearSelect">
         <option value="">Select Year</option>
       </select>
+
       <select id="monthSelect" disabled>
         <option value="">Select Month</option>
       </select>
+
     </div>
-    <br>
-    <iframe id="minutesFrame"></iframe>
+
+    <div class="viewer-container">
+      <iframe id="minutesFrame"></iframe>
+    </div>
+
   </div>
 
   <!-- UPCOMING PROJECTS -->
   <div class="card">
+
     <h2>Upcoming Projects</h2>
+
     <div id="upcomingProjects"></div>
+
   </div>
 
   <!-- FINISHED PROJECTS -->
   <div class="card">
-    <button class="toggle-btn" onclick="toggleFinished()">View Finished Projects</button>
-    <div id="finishedProjects" style="display:none"></div>
+
+    <button class="toggle-btn" onclick="toggleFinished()">
+      View Finished Projects
+    </button>
+
+    <div id="finishedProjects" style="display:none;margin-top:20px;"></div>
+
   </div>
 
-</section>
+</main>
 
 <footer>
-  © Riders FC | Board Governance System
+  © Riders FC | Professional Governance Management System
 </footer>
 
-<!-- FIREBASE + LOGIC -->
+<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  get
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-BUuIs7VCzeZgGXziqsAk-zr7UarRp4c",
@@ -246,70 +603,262 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/* MINUTES LOGIC (UNCHANGED) */
+/* ELEMENTS */
 const yearSelect = document.getElementById("yearSelect");
 const monthSelect = document.getElementById("monthSelect");
 const frame = document.getElementById("minutesFrame");
+
 let minutesIndex = {};
 
-get(ref(db, "minutes")).then(snapshot => {
-  if (!snapshot.exists()) return;
-  snapshot.forEach(child => {
-    const [year, month] = child.key.split("-");
-    if (!minutesIndex[year]) minutesIndex[year] = [];
+/* LOAD YEARS */
+get(ref(db,"minutes")).then(snapshot=>{
+
+  if(!snapshot.exists()) return;
+
+  snapshot.forEach(child=>{
+
+    const parts = child.key.split("-");
+
+    const year = parts[0];
+    const month = parts[1];
+
+    if(!minutesIndex[year]){
+      minutesIndex[year] = [];
+    }
+
     minutesIndex[year].push(month);
   });
-  Object.keys(minutesIndex).sort().forEach(y => {
-    yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
-  });
+
+  Object.keys(minutesIndex)
+    .sort()
+    .reverse()
+    .forEach(year=>{
+
+      yearSelect.innerHTML += `
+        <option value="${year}">
+          ${year}
+        </option>
+      `;
+    });
 });
 
-yearSelect.onchange = () => {
-  monthSelect.innerHTML = `<option value="">Select Month</option>`;
+/* YEAR CHANGE */
+yearSelect.onchange = ()=>{
+
+  monthSelect.innerHTML =
+    `<option value="">Select Month</option>`;
+
   frame.srcdoc = "";
-  (minutesIndex[yearSelect.value] || []).sort().forEach(m => {
-    monthSelect.innerHTML += `<option value="${m}">${m}</option>`;
+
+  const months =
+    minutesIndex[yearSelect.value] || [];
+
+  months.sort().forEach(month=>{
+
+    const date = new Date(
+      `${yearSelect.value}-${month}-01`
+    );
+
+    const monthName =
+      date.toLocaleString("default",{
+        month:"long"
+      });
+
+    monthSelect.innerHTML += `
+      <option value="${month}">
+        ${monthName}
+      </option>
+    `;
   });
+
   monthSelect.disabled = false;
 };
 
-monthSelect.onchange = () => {
-  const key = `${yearSelect.value}-${monthSelect.value}`;
-  get(ref(db, "minutes/" + key)).then(snap => {
-    frame.srcdoc = snap.exists()
-      ? snap.val().html
-      : "<p style='padding:20px'>No minutes available.</p>";
+/* LOAD MINUTES */
+monthSelect.onchange = ()=>{
+
+  const key =
+    `${yearSelect.value}-${monthSelect.value}`;
+
+  get(ref(db,"minutes/"+key)).then(snap=>{
+
+    if(!snap.exists()){
+
+      frame.srcdoc = `
+        <div style="
+          padding:40px;
+          font-family:Arial;
+        ">
+          <h2>No Minutes Available</h2>
+          <p>
+            No board meeting minutes were found
+            for this selected period.
+          </p>
+        </div>
+      `;
+
+      return;
+    }
+
+    const data = snap.val();
+
+    /* LOAD EXACT ADMIN TEMPLATE */
+    const professionalDocument = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+
+      <style>
+
+      body{
+        font-family:Arial,sans-serif;
+        background:#f4f6f9;
+        padding:30px;
+        color:#222;
+        line-height:1.9;
+      }
+
+      .document{
+        background:white;
+        max-width:100%;
+        margin:auto;
+        padding:45px;
+        border-radius:14px;
+        box-shadow:0 4px 18px rgba(0,0,0,0.08);
+      }
+
+      h1{
+        color:#0b3d91;
+        text-align:center;
+        margin-bottom:10px;
+      }
+
+      h2{
+        color:#0b3d91;
+        margin-top:35px;
+        border-bottom:2px solid #e8edf5;
+        padding-bottom:8px;
+      }
+
+      p,li{
+        font-size:16px;
+      }
+
+      ul,ol{
+        padding-left:25px;
+      }
+
+      table{
+        width:100%;
+        border-collapse:collapse;
+      }
+
+      table td,
+      table th{
+        border:1px solid #ccc;
+        padding:10px;
+      }
+
+      img{
+        max-width:100%;
+      }
+
+      @media(max-width:768px){
+
+        body{
+          padding:10px;
+        }
+
+        .document{
+          padding:20px;
+        }
+
+      }
+
+      </style>
+
+      </head>
+
+      <body>
+
+      <div class="document">
+
+      ${
+        data.fullDocument
+        || data.html
+        || "<p>No content found.</p>"
+      }
+
+      </div>
+
+      </body>
+      </html>
+    `;
+
+    frame.srcdoc = professionalDocument;
+
   });
+
 };
 
-/* PROJECTS (READ ONLY) */
-const upcomingEl = document.getElementById("upcomingProjects");
-const finishedEl = document.getElementById("finishedProjects");
+/* PROJECTS */
+const upcomingEl =
+document.getElementById("upcomingProjects");
 
-get(ref(db, "projects/upcoming")).then(snap => {
-  if (!snap.exists()) {
-    upcomingEl.innerHTML = "<p>No upcoming projects.</p>";
+const finishedEl =
+document.getElementById("finishedProjects");
+
+/* UPCOMING */
+get(ref(db,"projects/upcoming")).then(snap=>{
+
+  if(!snap.exists()){
+
+    upcomingEl.innerHTML =
+      "<p>No upcoming projects.</p>";
+
     return;
   }
-  snap.forEach(p => {
-    upcomingEl.innerHTML += `<div class="project">${p.val().title}</div>`;
+
+  snap.forEach(p=>{
+
+    upcomingEl.innerHTML += `
+      <div class="project">
+        ${p.val().title}
+      </div>
+    `;
   });
 });
 
-get(ref(db, "projects/finished")).then(snap => {
-  if (!snap.exists()) {
-    finishedEl.innerHTML = "<p>No finished projects.</p>";
+/* FINISHED */
+get(ref(db,"projects/finished")).then(snap=>{
+
+  if(!snap.exists()){
+
+    finishedEl.innerHTML =
+      "<p>No finished projects.</p>";
+
     return;
   }
-  snap.forEach(p => {
-    finishedEl.innerHTML += `<div class="project">${p.val().title}</div>`;
+
+  snap.forEach(p=>{
+
+    finishedEl.innerHTML += `
+      <div class="project">
+        ${p.val().title}
+      </div>
+    `;
   });
 });
 
-window.toggleFinished = () => {
+/* TOGGLE */
+window.toggleFinished = ()=>{
+
   finishedEl.style.display =
-    finishedEl.style.display === "none" ? "block" : "none";
+    finishedEl.style.display === "none"
+    ? "block"
+    : "none";
 };
+
 </script>
 
 </body>
