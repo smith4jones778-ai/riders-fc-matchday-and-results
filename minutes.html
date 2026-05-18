@@ -2,39 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Riders FC | Board Meeting Minutes</title>
+<title>Riders FC | Professional Board Meeting Minutes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 :root{
   --primary:#0b3d91;
-  --secondary:#123d80;
-  --bg:#eef2f7;
-  --card:#ffffff;
-  --border:#d9e1ec;
+  --secondary:#163f87;
+  --accent:#d4a017;
+  --light:#f4f7fc;
+  --white:#ffffff;
+  --border:#dce5f1;
+  --text:#222;
+  --shadow:0 8px 25px rgba(0,0,0,0.08);
 }
 
 *{
+  margin:0;
+  padding:0;
   box-sizing:border-box;
   font-family:Arial,sans-serif;
 }
 
 body{
-  margin:0;
-  background:var(--bg);
-  color:#222;
+  background:linear-gradient(to bottom,#eef3fb,#f7f9fc);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
 /* HEADER */
+
 header{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  background:linear-gradient(135deg,var(--primary),#08295f);
   color:white;
-  padding:1rem 2rem;
-  box-shadow:0 3px 10px rgba(0,0,0,0.12);
+  padding:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,0.15);
 }
 
 .header-inner{
   width:100%;
+  max-width:1450px;
+  margin:auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -45,7 +54,7 @@ header{
 .logo-wrap{
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:16px;
 }
 
 .logo-ring{
@@ -53,10 +62,11 @@ header{
   height:85px;
   border-radius:50%;
   background:white;
-  border:4px solid rgba(255,255,255,0.5);
+  border:4px solid rgba(255,255,255,0.25);
   display:flex;
   align-items:center;
   justify-content:center;
+  overflow:hidden;
 }
 
 .logo-ring img{
@@ -67,27 +77,29 @@ header{
 }
 
 .club-title h1{
-  margin:0;
   font-size:2rem;
+  margin-bottom:5px;
 }
 
 .club-title p{
-  margin:4px 0 0;
   opacity:0.9;
+  font-size:14px;
 }
+
+/* NAV */
 
 nav{
   display:flex;
+  gap:14px;
   flex-wrap:wrap;
-  gap:15px;
 }
 
 nav a{
   color:white;
   text-decoration:none;
+  padding:10px 16px;
+  border-radius:10px;
   font-weight:bold;
-  padding:8px 14px;
-  border-radius:6px;
   transition:0.2s;
 }
 
@@ -95,216 +107,185 @@ nav a:hover{
   background:rgba(255,255,255,0.12);
 }
 
-/* MAIN LAYOUT */
+/* MAIN */
+
 main{
   width:100%;
-  padding:20px;
+  padding:22px;
 }
 
-/* CARDS */
+/* CARD */
+
 .card{
   width:100%;
-  background:var(--card);
-  border-radius:16px;
-  padding:24px;
-  margin-bottom:24px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  background:var(--white);
+  border-radius:22px;
+  padding:26px;
+  margin-bottom:26px;
+  box-shadow:var(--shadow);
+  border:1px solid #edf2f8;
 }
 
-.card h2{
-  margin-top:0;
-  color:var(--primary);
-  margin-bottom:15px;
-}
-
-/* DIRECTORS */
-.directors{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
-}
-
-.director{
-  background:#f4f7ff;
-  border:1px solid #dfe7ff;
-  border-radius:12px;
-  padding:20px;
-  text-align:center;
-}
-
-.director h4{
-  margin:0;
-  color:var(--primary);
-}
-
-.director p{
-  margin-top:8px;
-  color:#555;
-}
-
-/* FILTERS */
-.filters{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
   gap:15px;
   margin-bottom:20px;
 }
 
+.card h2{
+  color:var(--primary);
+  font-size:1.6rem;
+}
+
+.card p{
+  line-height:1.9;
+  color:#444;
+}
+
+/* ABOUT */
+
+.about-box{
+  background:linear-gradient(to right,#f7faff,#ffffff);
+  border-left:5px solid var(--primary);
+  padding:22px;
+  border-radius:16px;
+}
+
+/* DIRECTORS */
+
+.directors{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.director{
+  background:#f7faff;
+  border:1px solid #dfe8f7;
+  border-radius:16px;
+  padding:22px;
+  text-align:center;
+  transition:0.25s;
+}
+
+.director:hover{
+  transform:translateY(-3px);
+}
+
+.director h4{
+  color:var(--primary);
+  margin-bottom:8px;
+}
+
+.director p{
+  color:#666;
+  font-size:14px;
+}
+
+/* FILTERS */
+
+.filters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:22px;
+}
+
 select{
   width:100%;
-  padding:14px;
-  border-radius:10px;
+  padding:15px;
+  border-radius:12px;
   border:1px solid var(--border);
   background:white;
   font-size:15px;
+  outline:none;
 }
 
-/* MINUTES VIEWER */
+select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(11,61,145,0.1);
+}
+
+/* VIEWER */
+
 .viewer-container{
   width:100%;
-  min-height:800px;
   background:white;
-  border-radius:14px;
-  border:1px solid #d8dee8;
+  border-radius:18px;
   overflow:hidden;
+  border:1px solid #dce5f1;
+  min-height:850px;
 }
 
 iframe{
   width:100%;
-  min-height:800px;
+  min-height:850px;
   border:none;
   background:white;
 }
 
 /* PROJECTS */
+
 .project{
-  background:#f4f7ff;
+  background:#f7faff;
   border-left:5px solid var(--primary);
-  padding:15px;
-  border-radius:8px;
-  margin-bottom:12px;
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:14px;
   font-weight:600;
+  line-height:1.7;
 }
 
+/* BUTTON */
+
 .toggle-btn{
-  background:var(--primary);
+  background:linear-gradient(135deg,var(--primary),#154ca4);
   color:white;
   border:none;
-  padding:13px 18px;
-  border-radius:8px;
+  padding:15px 20px;
+  border-radius:12px;
   cursor:pointer;
   font-size:15px;
   font-weight:bold;
+  transition:0.25s;
 }
 
 .toggle-btn:hover{
-  opacity:0.92;
+  transform:translateY(-2px);
+}
+
+/* BADGE */
+
+.top-badge{
+  background:rgba(255,255,255,0.12);
+  padding:12px 18px;
+  border-radius:30px;
+  font-weight:bold;
+  backdrop-filter:blur(6px);
 }
 
 /* FOOTER */
+
 footer{
   text-align:center;
-  padding:30px;
+  padding:28px;
   color:#666;
+  font-size:14px;
 }
 
-/* RESPONSIVE */
-@media(max-width:992px){
+/* MOBILE */
 
-  header{
-    padding:16px;
-  }
+@media(max-width:992px){
 
   .header-inner{
     flex-direction:column;
     align-items:flex-start;
-    gap:16px;
   }
 
   nav{
-    width:100%;
-    justify-content:flex-start;
-    overflow-x:auto;
-    padding-bottom:4px;
-  }
-
-  nav a{
-    white-space:nowrap;
-  }
-
-  main{
-    padding:12px;
-  }
-
-  .card{
-    padding:18px;
-    border-radius:14px;
-    width:100%;
-    overflow:hidden;
-  }
-
-  .directors{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .viewer-container{
-    width:100%;
-    border-radius:12px;
-    overflow:hidden;
-  }
-
-  iframe{
-    width:100%;
-    min-height:700px;
-    display:block;
-  }
-
-}
-
-/* MOBILE PHONES */
-@media(max-width:768px){
-
-  body{
-    overflow-x:hidden;
-  }
-
-  header{
-    padding:14px 12px;
-  }
-
-  .logo-wrap{
-    width:100%;
-    align-items:center;
-    gap:12px;
-  }
-
-  .logo-ring{
-    width:62px;
-    height:62px;
-    min-width:62px;
-  }
-
-  .logo-ring img{
-    width:48px;
-    height:48px;
-  }
-
-  .club-title{
-    width:100%;
-  }
-
-  .club-title h1{
-    font-size:1.35rem;
-    line-height:1.2;
-  }
-
-  .club-title p{
-    font-size:13px;
-    margin-top:3px;
-  }
-
-  nav{
-    gap:10px;
     width:100%;
     overflow-x:auto;
     flex-wrap:nowrap;
@@ -316,124 +297,91 @@ footer{
   }
 
   nav a{
-    font-size:13px;
-    padding:8px 12px;
     flex-shrink:0;
   }
 
-  main{
-    width:100%;
-    padding:8px;
-  }
-
-  .card{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    margin-bottom:14px;
-  }
-
-  .card h2{
-    font-size:1.15rem;
-    line-height:1.4;
-  }
-
-  .card p{
-    font-size:14px;
-    line-height:1.7;
-  }
-
-  .filters{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-
-  select{
-    width:100%;
-    padding:13px;
-    font-size:15px;
-    border-radius:10px;
-  }
-
   .directors{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-
-  .director{
-    width:100%;
-    padding:16px;
-  }
-
-  .director h4{
-    font-size:15px;
-  }
-
-  .director p{
-    font-size:13px;
-  }
-
-  .viewer-container{
-    width:100%;
-    min-height:auto;
-    border-radius:10px;
-    overflow:hidden;
-  }
-
-  iframe{
-    width:100%;
-    min-height:85vh;
-    border:none;
-    display:block;
-    background:white;
-  }
-
-  .project{
-    width:100%;
-    padding:14px;
-    font-size:14px;
-    line-height:1.6;
-  }
-
-  .toggle-btn{
-    width:100%;
-    padding:14px;
-    font-size:15px;
-  }
-
-  footer{
-    padding:20px 12px;
-    font-size:13px;
-    line-height:1.6;
+    grid-template-columns:1fr 1fr;
   }
 
 }
 
-/* EXTRA SMALL DEVICES */
-@media(max-width:480px){
+@media(max-width:768px){
+
+  body{
+    overflow-x:hidden;
+  }
+
+  header{
+    padding:15px 12px;
+  }
 
   main{
-    padding:6px;
+    padding:10px;
   }
 
   .card{
-    padding:12px;
-    border-radius:10px;
+    padding:16px;
+    border-radius:16px;
+  }
+
+  .logo-ring{
+    width:65px;
+    height:65px;
+  }
+
+  .logo-ring img{
+    width:50px;
+    height:50px;
+  }
+
+  .club-title h1{
+    font-size:1.4rem;
+  }
+
+  .club-title p{
+    font-size:13px;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .directors{
+    grid-template-columns:1fr;
+  }
+
+  .viewer-container{
+    min-height:auto;
+    border-radius:14px;
+  }
+
+  iframe{
+    min-height:88vh;
+  }
+
+  .toggle-btn{
+    width:100%;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .card{
+    padding:13px;
   }
 
   .club-title h1{
     font-size:1.2rem;
   }
 
-  .club-title p{
-    font-size:12px;
-  }
-
   iframe{
-    min-height:90vh;
+    min-height:92vh;
   }
 
 }
+
 </style>
 </head>
 
@@ -451,15 +399,20 @@ footer{
 
       <div class="club-title">
         <h1>Riders FC</h1>
-        <p>Board Governance & Meeting Minutes</p>
+        <p>Professional Governance & Board Meeting Minutes</p>
       </div>
 
     </div>
 
+    <div class="top-badge">
+      Governance Management System
+    </div>
+
     <nav>
       <a href="#">Home</a>
-      <a href="#">Players</a>
-      <a href="#">Contribution</a>
+      <a href="#">Board</a>
+      <a href="#">Projects</a>
+      <a href="#">Minutes</a>
     </nav>
 
   </div>
@@ -469,58 +422,73 @@ footer{
 <main>
 
   <!-- ABOUT -->
+
   <div class="card">
 
-    <h2>About Riders FC</h2>
+    <div class="card-header">
 
-    <p style="line-height:1.8;">
-      Riders FC is committed to professional governance,
-      transparency, strategic planning, and accountability through
-      structured Board meetings and documented resolutions.
-    </p>
+      <h2>About Riders FC</h2>
+
+    </div>
+
+    <div class="about-box">
+
+      <p>
+        Riders FC maintains a professional governance structure
+        focused on transparency, accountability, strategic planning,
+        operational excellence, and sustainable development through
+        properly documented Board Meetings and resolutions.
+      </p>
+
+    </div>
 
   </div>
 
   <!-- DIRECTORS -->
+
   <div class="card">
 
-    <h2>Board of Directors</h2>
+    <div class="card-header">
+
+      <h2>Board of Directors</h2>
+
+    </div>
 
     <div class="directors">
 
       <div class="director">
-        <h4>Mr. Okechwu Samuel</h4>
-        <p>Chairman & Director of finance</p>
+        <h4>Okechwu Samuel</h4>
+        <p>Chairman</p>
       </div>
 
       <div class="director">
-        <h4>Mr. Hassan Musa</h4>
-        <p>Financial Secretary & Director of Players development</p>
+        <h4>Marshall Jacob</h4>
+        <p>Vice Chairman</p>
       </div>
 
       <div class="director">
-        <h4>Mr. Marshall Jacob</h4>
-        <p>Secretary & Director of media and communication</p>
+        <h4>Hassan Musa</h4>
+        <p>Secretary</p>
       </div>
 
       <div class="director">
-        <h4>Mr. Akinola Akeem</h4>
-        <p>Director of Training facilities</p>
+        <h4>Owem Aslem</h4>
+        <p>Treasurer</p>
       </div>
 
       <div class="director">
-        <h4>Mr. Owem Aslem</h4>
-        <p>Director of Events</p>
+        <h4>Yunusa Jubrin</h4>
+        <p>Director of Operations</p>
       </div>
 
       <div class="director">
-        <h4>Mr. Akintola Akinremi</h4>
-        <p>Director of public relations</p>
+        <h4>Akeem</h4>
+        <p>Board Member</p>
       </div>
 
       <div class="director">
-        <h4>Mr.Yunusa Jibrin</h4>
-        <p>Director of Marketing and sales</p>
+        <h4>AKINTOLA</h4>
+        <p>Independent Director</p>
       </div>
 
     </div>
@@ -528,9 +496,14 @@ footer{
   </div>
 
   <!-- MINUTES -->
+
   <div class="card">
 
-    <h2>Board Meeting Minutes</h2>
+    <div class="card-header">
+
+      <h2>Board Meeting Minutes</h2>
+
+    </div>
 
     <div class="filters">
 
@@ -550,23 +523,32 @@ footer{
 
   </div>
 
-  <!-- UPCOMING PROJECTS -->
+  <!-- UPCOMING -->
+
   <div class="card">
 
-    <h2>Upcoming Projects</h2>
+    <div class="card-header">
+
+      <h2>Upcoming Projects</h2>
+
+    </div>
 
     <div id="upcomingProjects"></div>
 
   </div>
 
-  <!-- FINISHED PROJECTS -->
+  <!-- FINISHED -->
+
   <div class="card">
 
     <button class="toggle-btn" onclick="toggleFinished()">
       View Finished Projects
     </button>
 
-    <div id="finishedProjects" style="display:none;margin-top:20px;"></div>
+    <div
+      id="finishedProjects"
+      style="display:none;margin-top:22px;"
+    ></div>
 
   </div>
 
@@ -577,6 +559,7 @@ footer{
 </footer>
 
 <!-- FIREBASE -->
+
 <script type="module">
 
 import { initializeApp }
@@ -590,68 +573,93 @@ import {
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyB-BUuIs7VCzeZgGXziqsAk-zr7UarRp4c",
+
   authDomain: "survey-d97e7.firebaseapp.com",
+
   databaseURL: "https://survey-d97e7-default-rtdb.firebaseio.com",
+
   projectId: "survey-d97e7",
+
   storageBucket: "survey-d97e7.firebasestorage.app",
+
   messagingSenderId: "861361956801",
-  appId: "1:861361956801:web:65b2ee8eb04f5c2d5d3140",
-  measurementId: "G-QW860EGGZ9"
+
+  appId: "1:861361956801:web:65b2ee8eb04f5c2d5d3140"
+
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getDatabase(app);
 
 /* ELEMENTS */
-const yearSelect = document.getElementById("yearSelect");
-const monthSelect = document.getElementById("monthSelect");
-const frame = document.getElementById("minutesFrame");
+
+const yearSelect =
+document.getElementById("yearSelect");
+
+const monthSelect =
+document.getElementById("monthSelect");
+
+const frame =
+document.getElementById("minutesFrame");
 
 let minutesIndex = {};
 
 /* LOAD YEARS */
+
 get(ref(db,"minutes")).then(snapshot=>{
 
   if(!snapshot.exists()) return;
 
   snapshot.forEach(child=>{
 
-    const parts = child.key.split("-");
+    const parts =
+    child.key.split("-");
 
-    const year = parts[0];
-    const month = parts[1];
+    const year =
+    parts[0];
+
+    const month =
+    parts[1];
 
     if(!minutesIndex[year]){
+
       minutesIndex[year] = [];
+
     }
 
     minutesIndex[year].push(month);
+
   });
 
   Object.keys(minutesIndex)
-    .sort()
-    .reverse()
-    .forEach(year=>{
+  .sort()
+  .reverse()
+  .forEach(year=>{
 
-      yearSelect.innerHTML += `
-        <option value="${year}">
-          ${year}
-        </option>
-      `;
-    });
+    yearSelect.innerHTML += `
+      <option value="${year}">
+        ${year}
+      </option>
+    `;
+
+  });
+
 });
 
 /* YEAR CHANGE */
+
 yearSelect.onchange = ()=>{
 
   monthSelect.innerHTML =
-    `<option value="">Select Month</option>`;
+  `<option value="">Select Month</option>`;
 
   frame.srcdoc = "";
 
   const months =
-    minutesIndex[yearSelect.value] || [];
+  minutesIndex[yearSelect.value] || [];
 
   months.sort().forEach(month=>{
 
@@ -660,88 +668,136 @@ yearSelect.onchange = ()=>{
     );
 
     const monthName =
-      date.toLocaleString("default",{
-        month:"long"
-      });
+    date.toLocaleString("default",{
+      month:"long"
+    });
 
     monthSelect.innerHTML += `
       <option value="${month}">
         ${monthName}
       </option>
     `;
+
   });
 
   monthSelect.disabled = false;
+
 };
 
 /* LOAD MINUTES */
+
 monthSelect.onchange = ()=>{
 
   const key =
-    `${yearSelect.value}-${monthSelect.value}`;
+  `${yearSelect.value}-${monthSelect.value}`;
 
   get(ref(db,"minutes/"+key)).then(snap=>{
 
     if(!snap.exists()){
 
       frame.srcdoc = `
+
         <div style="
-          padding:40px;
-          font-family:Arial;
+          font-family:Arial,sans-serif;
+          background:#f4f7fc;
+          min-height:100vh;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:20px;
         ">
-          <h2>No Minutes Available</h2>
-          <p>
-            No board meeting minutes were found
-            for this selected period.
-          </p>
+
+          <div style="
+            background:white;
+            max-width:500px;
+            width:100%;
+            border-radius:18px;
+            padding:40px;
+            text-align:center;
+            box-shadow:0 8px 25px rgba(0,0,0,0.08);
+          ">
+
+            <h2 style="
+              color:#0b3d91;
+              margin-bottom:15px;
+            ">
+              No Minutes Available
+            </h2>
+
+            <p style="
+              color:#666;
+              line-height:1.8;
+            ">
+              No Board Meeting Minutes
+              were found for this
+              selected period.
+            </p>
+
+          </div>
+
         </div>
+
       `;
 
       return;
+
     }
 
     const data = snap.val();
 
-    /* LOAD EXACT ADMIN TEMPLATE */
     const professionalDocument = `
+
       <!DOCTYPE html>
+
       <html>
+
       <head>
 
       <style>
 
       body{
+        margin:0;
+        padding:25px;
+        background:#eef3fb;
         font-family:Arial,sans-serif;
-        background:#f4f6f9;
-        padding:30px;
         color:#222;
-        line-height:1.9;
       }
 
       .document{
         background:white;
         max-width:100%;
         margin:auto;
-        padding:45px;
-        border-radius:14px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.08);
+        padding:35px;
+        border-radius:20px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.08);
+      }
+
+      img{
+        max-width:100%;
       }
 
       h1{
         color:#0b3d91;
         text-align:center;
-        margin-bottom:10px;
       }
 
       h2{
-        color:#0b3d91;
-        margin-top:35px;
-        border-bottom:2px solid #e8edf5;
-        padding-bottom:8px;
+        background:linear-gradient(
+          135deg,
+          #0b3d91,
+          #174b9f
+        );
+        color:white;
+        text-align:center;
+        padding:12px;
+        border-radius:12px;
+        margin-top:30px;
+        font-size:18px;
       }
 
       p,li{
-        font-size:16px;
+        font-size:15px;
+        line-height:1.9;
       }
 
       ul,ol{
@@ -751,16 +807,13 @@ monthSelect.onchange = ()=>{
       table{
         width:100%;
         border-collapse:collapse;
+        margin-top:15px;
       }
 
       table td,
       table th{
-        border:1px solid #ccc;
-        padding:10px;
-      }
-
-      img{
-        max-width:100%;
+        border:1px solid #dce5f1;
+        padding:12px;
       }
 
       @media(max-width:768px){
@@ -770,7 +823,8 @@ monthSelect.onchange = ()=>{
         }
 
         .document{
-          padding:20px;
+          padding:18px;
+          border-radius:14px;
         }
 
       }
@@ -785,23 +839,26 @@ monthSelect.onchange = ()=>{
 
       ${
         data.fullDocument
-        || data.html
         || "<p>No content found.</p>"
       }
 
       </div>
 
       </body>
+
       </html>
+
     `;
 
-    frame.srcdoc = professionalDocument;
+    frame.srcdoc =
+    professionalDocument;
 
   });
 
 };
 
 /* PROJECTS */
+
 const upcomingEl =
 document.getElementById("upcomingProjects");
 
@@ -809,54 +866,69 @@ const finishedEl =
 document.getElementById("finishedProjects");
 
 /* UPCOMING */
+
 get(ref(db,"projects/upcoming")).then(snap=>{
 
   if(!snap.exists()){
 
     upcomingEl.innerHTML =
-      "<p>No upcoming projects.</p>";
+    "<p>No upcoming projects available.</p>";
 
     return;
+
   }
 
   snap.forEach(p=>{
 
     upcomingEl.innerHTML += `
+
       <div class="project">
         ${p.val().title}
       </div>
+
     `;
+
   });
+
 });
 
 /* FINISHED */
+
 get(ref(db,"projects/finished")).then(snap=>{
 
   if(!snap.exists()){
 
     finishedEl.innerHTML =
-      "<p>No finished projects.</p>";
+    "<p>No finished projects available.</p>";
 
     return;
+
   }
 
   snap.forEach(p=>{
 
     finishedEl.innerHTML += `
+
       <div class="project">
         ${p.val().title}
       </div>
+
     `;
+
   });
+
 });
 
 /* TOGGLE */
+
 window.toggleFinished = ()=>{
 
   finishedEl.style.display =
-    finishedEl.style.display === "none"
-    ? "block"
-    : "none";
+
+  finishedEl.style.display === "none"
+  ? "block"
+  : "none";
+
 };
 
 </script>
